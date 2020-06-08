@@ -1,0 +1,12 @@
+{
+	"name": "Mercado Principal",
+  "email": "contato@mercadoprincipal.com",
+  "whatsapp": "+55 32 99800-1671",
+  "latitude": -21.7775805,
+  "longitude": 42.5427905,
+  "city": "Volta Grande",
+  "uf": "Minas Gerais",
+	"items": [
+		1, 2
+	]
+}
