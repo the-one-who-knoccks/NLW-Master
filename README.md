@@ -32,7 +32,7 @@
 
 ## Sobre 🗒
 </br>
-<h3> A aplicação foi o <b>Ecoleta</b>. ♻ Um projeto Open Source de um marketplace para cadastro de ponto de coletas de resíduos variados(web), onde o usário pode escolher o ponto cadastrado e entrar em contato(mobile)com o estabelecimento. O projeto foi desenvolvido usando as tecnologias Node, React e React Native com TypeScript</h3>
+<h3> A aplicação foi o <b>Ecoleta</b>. ♻ Um projeto Open Source de um marketplace para cadastro de ponto de coletas de resíduos variados (via aplicação web), onde o usário pode escolher o ponto cadastrado e entrar em contato (via aplicação mobile) com o estabelecimento. O projeto foi desenvolvido usando as tecnologias Node, React e React Native com TypeScript</h3>
 </br>
 
 ---
