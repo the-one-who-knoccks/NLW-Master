@@ -91,7 +91,7 @@
 ## Mobile 📱
 
 <h1 align="center">
-  <img src="https://ik.imagekit.io/hld13bjzb1/66acd345-75a6-4bf3-89e9-f1f91d80c364_cS2J111Qz.jpeg">
+  <img src="https://ik.imagekit.io/hld13bjzb1/7a17e49d-6076-44bd-b1b7-9c052c53f1b0_WonJb_5Fs.jpeg" width="400" heigth="600">
 
 </h1>
 
