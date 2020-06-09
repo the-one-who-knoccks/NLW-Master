@@ -1,20 +1,72 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect, useCallback} from 'react';
 import { Feather as Icon } from '@expo/vector-icons';
 import { View, ImageBackground, Image, Text, StyleSheet, TextInput, KeyboardAvoidingView, Platform } from 'react-native';
 import { RectButton } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
+import Select, { Item } from 'react-native-picker-select';
 
-const Home = () => {
-  const [uf, setUf] = useState('');
-  const [city, setCity] = useState('');
+import ibge from '../../services/ibgeApi';
+
+interface IBGEUfRes {
+  sigla: string;
+}
+
+interface IBGECityRes {
+  nome: string;
+}
+
+const Home: React.FC = () => {
   const navigation = useNavigation();
 
-  function handleNavigateToPoints() {
+  const [ufs, setUfs] = useState<Item[]>([]);
+  const [cities, setCities] = useState<Item[]>([]);
+
+  const [uf, setUf] = useState('');
+  const [city, setCity] = useState('');
+
+  useEffect(() => {
+    ibge.get<IBGEUfRes[]>('/v1/localidades/estados').then((res) => {
+      const ufInitials = res.data.map((uf) => {
+        return {
+          label: uf.sigla,
+          value: uf.sigla,
+        };
+      })
+        .sort((a, b) => {
+          if (a.value > b.value) {
+            return 1;
+          }
+          if (a.value < b.value) {
+            return -1;
+          }
+
+          return 0;
+        });
+
+      setUfs(ufInitials);
+    });
+  }, []);
+
+  useEffect(() => {
+    if (uf) {
+      ibge
+        .get<IBGECityRes[]>(`/v1/localidades/estados/${uf}/municipios`)
+        .then((res) => {
+          const citiesNames = res.data.map((city) => {
+            return { label: city.nome, value: city.nome };
+          });
+
+          setCities(citiesNames);
+        });
+    }
+  }, [uf]);
+
+  const handleNavigateToPoints = useCallback(() => {
     navigation.navigate('Points', {
       uf,
       city,
     });
-  }
+  }, [uf, city]);
 
   return (
     <KeyboardAvoidingView style={{flex:1}} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
@@ -32,24 +84,27 @@ const Home = () => {
         </View>
 
         <View style={styles.footer}>
-          <TextInput
-            style={styles.input}
-            placeholder="Digite a UF"
-            value={uf}
-            // autoCapitalize="characters"
-            autoCorrect={false}
-            onChangeText={setUf}
-          />
+          
 
-          <TextInput
-            style={styles.input}
-            placeholder="Digite a cidade"
-            value={city}
-            // autoCapitalize="characters"
-            autoCorrect={false}
-            onChangeText={setCity}
-          />
+            <Select
+              onValueChange={(value) =>setUf(value)}
+              items={ufs}
+              placeholder={{ label: 'Selecione o estado' }}
+              style={{
+                viewContainer: styles.select,
+                placeholder: styles.selectText,
+              }}
+            />
 
+            <Select
+              onValueChange={(value) => setCity(value)}
+              items={cities}
+              placeholder={{ label: 'Selecione a cidade' }}
+              style={{
+                viewContainer: styles.select,
+                placeholder: styles.selectText,
+              }}
+            />
 
           <RectButton style={styles.button} onPress={handleNavigateToPoints}>
             <View style={styles.buttonIcon}>
@@ -99,7 +154,19 @@ const styles = StyleSheet.create({
 
   footer: {},
 
-  select: {},
+  select: {
+    height: 60,
+    backgroundColor: '#FFF',
+    borderRadius: 10,
+    marginBottom: 10,
+    paddingHorizontal: 25,
+    justifyContent: 'center',
+  },
+
+  selectText: {
+    fontSize: 16,
+  },
+
 
   input: {
     height: 60,
