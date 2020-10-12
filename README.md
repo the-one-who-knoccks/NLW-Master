@@ -7,7 +7,7 @@
 
 <h1> 
   Next Level Week foi uma semana de muito código, networking e principais conceitos de programação, criada pela <b>Rocketseat</b>. Onde aprendemos na prática o desenvolvimento de uma aplicação completa envolvendo back-end, front-end e mobile. 🚀
-</h1>
+</h1>  
  
    
 # Indice
