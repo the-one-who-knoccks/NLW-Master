@@ -14,7 +14,7 @@
 - [Sobre o projeto](#-sobre)
 - [Tecnologias utilizadas](#-technologias-utilizadas)
 - [Como rodar o projeto](#-Como-usar)
-
+ 
 
 <h1 align="center">
   <img src="https://ik.imagekit.io/hld13bjzb1/ecoleta_zVRWQLAEu.png">
